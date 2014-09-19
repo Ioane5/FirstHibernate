@@ -17,6 +17,17 @@ public class User {
 
 	private String telephoneNumber;
 
+	
+	
+	public User(int id, String firstName, String lastName, Date birthDate,
+			String telephoneNumber) {
+		super();
+		this.id = id;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.birthDate = birthDate;
+		this.telephoneNumber = telephoneNumber;
+	}
 
 	public int getId() {
 		return id;
