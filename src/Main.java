@@ -37,6 +37,7 @@ public class Main {
 		
 		session.save(user);
 		session.save(car);
+
 		
 		session.getTransaction().commit();
 		session.close();

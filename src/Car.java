@@ -1,10 +1,15 @@
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 
 @Entity
@@ -13,7 +18,11 @@ public class Car {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 
+	//@ManyToOne (targetEntity = User.class)
 	@ManyToOne
+	@JoinTable(name="USER_CAR",
+			joinColumns=@JoinColumn(name="OWNER_ID"),
+			inverseJoinColumns=@JoinColumn(name="CAR_ID"))
 	private User owner;
 
 	private String carName;

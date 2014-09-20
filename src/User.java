@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -15,7 +17,8 @@ import javax.persistence.OneToOne;
 @Entity
 public class User {
 
-	@Id @GeneratedValue(strategy = GenerationType.AUTO)
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 
 	private String firstName;
@@ -25,13 +28,14 @@ public class User {
 	private Date birthDate;
 
 	private String telephoneNumber;
-	
-	@OneToMany
-	private Set<Car> cars = new HashSet<>(); 
 
-	// hibernate  needs it , due to reflection use. 
-	public User(){}
-	
+	@OneToMany (mappedBy="owner", targetEntity=Car.class, orphanRemoval=false)
+	private Set<Car> cars = new HashSet<>();
+
+	// hibernate needs it , due to reflection use.
+	public User() {
+	}
+
 	public User(int id, String firstName, String lastName, Date birthDate,
 			String telephoneNumber) {
 		super();
@@ -81,15 +85,15 @@ public class User {
 	public void setTelephoneNumber(String telephoneNumber) {
 		this.telephoneNumber = telephoneNumber;
 	}
-	
-	public void setCars(Set<Car> cars){
+
+	public void setCars(Set<Car> cars) {
 		this.cars = cars;
 	}
-	
-	public Set<Car> getCars(){
+
+	public Set<Car> getCars() {
 		return cars;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", firstName=" + firstName + ", lastName="
@@ -97,7 +101,6 @@ public class User {
 				+ telephoneNumber + ", cars =" + cars.toString() + "]";
 	}
 
-	//private List<User> friends;
-
+	// private List<User> friends;
 
 }
