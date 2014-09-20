@@ -1,4 +1,6 @@
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -22,12 +24,20 @@ public class Main {
 	}
 
 	public static void main(String[] args) {
-		User user = new User(5, "ioane", "sharvadze", new Date(),
+		User user = new User(15, "ioane", "sharvadze", new Date(),
 				"5654654654654654");
-
+		Car car = new Car("masserati" , new Date());
+		car.setOwner(user);
+		Set<Car> userCars = new HashSet<>();
+		userCars.add(car);
+		user.setCars(userCars);
+		
 		Session session = getSessionFactory().openSession();
 		session.beginTransaction();
+		
 		session.save(user);
+		session.save(car);
+		
 		session.getTransaction().commit();
 		session.close();
 	}

@@ -45,7 +45,7 @@
 
 		<!-- Names the annotated entity class -->
 		<mapping class="User" />
-		
+		<mapping class="Car" />
 
 	</session-factory>
 
